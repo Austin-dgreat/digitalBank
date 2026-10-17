@@ -37,6 +37,11 @@ const customerSchema = new mongoose.Schema({
     unique: true,
     trim: true
   },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6
+  },
   role: {
     type: String,
     enum: ['customer', 'admin'],
@@ -46,19 +51,20 @@ const customerSchema = new mongoose.Schema({
       type: String,
       enum: ["BVN", "NIN"],
     },
-
   number: {
     type: String,
   },
-
   verified: {
     type: Boolean,
     default: false,
   },
-
   verifiedAt: {
     type: Date,
   },
+  balance: {
+    type: Number,
+    default: 0
+  }
 },
 {
   timestamps: true
@@ -66,4 +72,5 @@ const customerSchema = new mongoose.Schema({
 );
 
 // create a model for the customer schema
-module.exports = mongoose.model('Customer', customerSchema);
+const customer = mongoose.model('customer', customerSchema);
+module.exports = customer;

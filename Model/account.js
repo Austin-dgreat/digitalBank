@@ -13,11 +13,20 @@ const accountSchema = new mongoose.Schema({
     unique: true,
     trim: true
   },
+  accountName: {
+    type: String,
+    required: true
+  },
   accountType: {
     type: String,
     required: true,
     enum: ['current', 'savings']
   },
+  balance: {
+    type: mongoose.Schema.Types.Decimal128,
+    default: 0
+  }
 
 });
-module.exports = mongoose.model('Account', accountSchema);
+const account = mongoose.model('account', accountSchema);
+module.exports = account;
