@@ -6,13 +6,16 @@ const app = express();
 
 const accountRoute = require('./Routes/accountRoute');
 
+const customerRoute = require('./Routes/customerroute');
+
 dotenv.config();  // Load environment variables from .env file
 connectDB();  // Connect to the MongoDB database
 
 app.use(express.json());  // Middleware to parse JSON request bodies
 
-app.use('/accounts', accountRoute);  // use the account routes for any requests to /accounts
+app.use('/customers', customerRoute);  // use the customer routes for any requests to /customers
 
+app.use('/accounts', accountRoute);  // use the account routes for any requests to /accounts
 
 
 app.listen(process.env.PORT, () => {

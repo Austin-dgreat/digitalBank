@@ -9,13 +9,14 @@ const createAccount = async (req, res) => {
       return res.status(400).json({ message: 'Please provide all required fields' });
     }
 
-    const { customerId, accountNumber, accountName, accountType } = req.body;
+    const { customerId, accountNumber, accountName, accountType, balance } = req.body;
 
     const newAccount = new Account({
       customer: customerId,
       accountNumber,
       accountName,
-      accountType
+      accountType,
+      balance
     });
 
     await newAccount.save();
