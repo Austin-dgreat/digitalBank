@@ -162,8 +162,16 @@ const loginCustomer = async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
+    // generate a token for the customer (you can use JWT or any other method)
+
+    const jwt = require('jsonwebtoken');
+    const token = jwt.sign(
+      { id: customerRecord._id, email: customerRecord.email },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h'});
+
     // If credentials are valid, return a success response
-    res.status(200).json({ message: 'Login successful', customer: customerRecord });
+    res.status(200).json({ message: 'Login successful', token, customer: customerRecord });
   } catch (error) {
     res.status(500).json({ message: 'Error logging in customer', error: error.message });
   }
